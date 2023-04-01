@@ -13,7 +13,9 @@ nlp = spacy.load('en_core_web_sm')
 data = pd.read_csv("skills.csv")
 
 app = Flask(__name__)
-CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 @app.route('/')
 def index():
     return "API is working"
