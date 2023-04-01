@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS,cross_origin
 import io
 import nltk
 import spacy
@@ -21,6 +21,7 @@ def index():
     return "API is working"
 
 @app.route('/upload_resume', methods=['POST'])
+@cross_origin()
 def upload_resume():
     if 'resume' not in request.files:
         return jsonify({'error': 'No resume uploaded'})
