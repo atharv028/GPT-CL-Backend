@@ -16,7 +16,7 @@ def getPrompt(resumeText):
   else:
     text += f"""
       You are a cover letter generator.
-      You will have to generate different Cover Letter for different roles this person can appy for.
+      You will have to generate seperate Cover Letter for different roles this person can appy for.
       You will write a very short cover letter for the applicant named "{resumeText['name']}" that matches their past experiences and skills from the resume.
       Rather than simply outlining the applicant's past experiences, you will give more detail and explain how those experiences will help the applicant succeed in the new job.
       You will write the cover letter in a modern, {"creative and realxed" if resumeText['creative'] else "professional"} style without being too formal, as a human might do naturally.
