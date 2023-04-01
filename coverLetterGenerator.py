@@ -9,18 +9,18 @@ def getPrompt(resumeText):
       You will write a very short cover letter for the applicant named "{resumeText['name']}" that matches their past experiences and skills from the resume with the job description.
       Rather than simply outlining the applicant's past experiences, you will give more detail and explain how those experiences will help the applicant succeed in the new job.
       You will write the cover letter in a modern, {"creative and realxed" if resumeText['creative'] else "professional"} style without being too formal, as a human might do naturally.
-      {"You will also be witty and funny" if resumeText['witty'] else ""}      
+      {"Also include witty comment regarding role at end." if resumeText['witty'] else ""}      
       Job title : {resumeText['job_title']}.
       Job description : {resumeText['job_description']}
     """
   else:
     text += f"""
       You are a cover letter generator.
-      You will have to generate seperate Cover Letter for different roles this person can appy for.
+      You will have to generate multiple seperate Cover Letter for different roles this person can appy for.
       You will write a very short cover letter for the applicant named "{resumeText['name']}" that matches their past experiences and skills from the resume.
       Rather than simply outlining the applicant's past experiences, you will give more detail and explain how those experiences will help the applicant succeed in the new job.
       You will write the cover letter in a modern, {"creative and realxed" if resumeText['creative'] else "professional"} style without being too formal, as a human might do naturally.
-      {"You will also be witty and funny" if resumeText['witty'] else ""}
+      {"Also include witty comment regarding role at end." if resumeText['witty'] else ""}
     """
   for key, value in resumeText.items():
     if key not in ['job_title','job_description','creative','witty','name']:
