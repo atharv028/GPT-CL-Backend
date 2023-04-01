@@ -24,6 +24,7 @@ def index():
     return "API is working"
 
 @app.route('/login', methods=['GET'])
+@cross_origin()
 def request_login():
     args = request.args
     result = auth.challenge.request_challenge_evm(
@@ -34,7 +35,6 @@ def request_login():
             "address": args.get('address'),
             "statement": "Please confirm your login.",
             "uri": "https://gptClThink.com",
-            "resources": [],
             "timeout": 30,
         }
     )
