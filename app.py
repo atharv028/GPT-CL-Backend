@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS,cross_origin
 import io
+import dotenv,os
 import nltk
 import spacy
 import pandas as pd
 import pdfminer.high_level
+from moralis import auth
 from coverLetterGenerator import generateCoverLetter
 
 nltk.download('punkt')
@@ -15,10 +17,39 @@ data = pd.read_csv("skills.csv")
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app, resources={r"/*": {"origins": "*"}})
+dotenv.load_dotenv()
 
 @app.route('/')
 def index():
     return "API is working"
+
+@app.route('/login', methods=['GET'])
+def request_login():
+    args = request.args
+    result = auth.challenge.request_challenge_evm(
+    api_key=os.getenv("MORALIS_API_KEY"),
+    body = {
+            "domain": "gptClThink.com",
+            "chain_id": args.get('chain_id'),
+            "address": args.get('address'),
+            "statement": "Please confirm your login.",
+            "uri": "https://gptClThink.com",
+            "resources": [],
+            "timeout": 30,
+        }
+    )
+    return result
+
+@app.route('/verifyLogin', methods=['GET'])
+def verify_login():
+    args = request.args
+    result = auth.challenge.verify_challenge_evm(
+    api_key=os.getenv("MORALIS_API_KEY"),
+    body={
+        "message": args.get('message'),
+        "signature": args.get('signature'),
+    },)
+    return result
 
 @app.route('/upload_resume', methods=['POST'])
 @cross_origin()
