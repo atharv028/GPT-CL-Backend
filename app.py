@@ -31,7 +31,7 @@ def request_login():
     api_key=os.getenv("MORALIS_API_KEY"),
     body = {
             "domain": "gptClThink.com",
-            "chain_id": args.get('chain_id'),
+            "chainId": args.get('chain_id'),
             "address": args.get('address'),
             "statement": "Please confirm your login.",
             "uri": "https://gptClThink.com",
