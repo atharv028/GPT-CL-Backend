@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import io
 import nltk
 import spacy
@@ -12,6 +13,7 @@ nlp = spacy.load('en_core_web_sm')
 data = pd.read_csv("skills.csv")
 
 app = Flask(__name__)
+CORS(app)
 @app.route('/')
 def index():
     return "API is working"
