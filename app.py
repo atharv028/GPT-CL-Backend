@@ -30,11 +30,11 @@ def request_login():
     result = auth.challenge.request_challenge_evm(
     api_key=os.getenv("MORALIS_API_KEY"),
     body = {
-            "domain": "gptClThink.com",
+            "domain": "think-3rba.onrender.com",
             "chainId": args.get('chain_id'),
             "address": args.get('address'),
             "statement": "Please confirm your login.",
-            "uri": "https://gptClThink.com",
+            "uri": "https://think-3rba.onrender.com/",
             "timeout": 30,
         }
     )
