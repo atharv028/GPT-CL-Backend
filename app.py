@@ -6,7 +6,6 @@ import nltk
 import spacy
 import pandas as pd
 import pdfminer.high_level
-from moralis import auth
 from coverLetterGenerator import generateCoverLetter
 
 nltk.download('punkt')
@@ -22,34 +21,6 @@ dotenv.load_dotenv()
 @app.route('/')
 def index():
     return "API is working"
-
-@app.route('/login', methods=['GET'])
-@cross_origin()
-def request_login():
-    args = request.args
-    result = auth.challenge.request_challenge_evm(
-    api_key=os.getenv("MORALIS_API_KEY"),
-    body = {
-            "domain": "think-3rba.onrender.com",
-            "chainId": args.get('chain_id'),
-            "address": args.get('address'),
-            "statement": "Please confirm your login.",
-            "uri": "https://think-3rba.onrender.com/",
-            "timeout": 30,
-        }
-    )
-    return result
-
-@app.route('/verifyLogin', methods=['GET'])
-def verify_login():
-    args = request.args
-    result = auth.challenge.verify_challenge_evm(
-    api_key=os.getenv("MORALIS_API_KEY"),
-    body={
-        "message": args.get('message'),
-        "signature": args.get('signature'),
-    },)
-    return result
 
 @app.route('/upload_resume', methods=['POST'])
 @cross_origin()
